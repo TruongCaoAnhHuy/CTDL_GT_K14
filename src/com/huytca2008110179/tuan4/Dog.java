@@ -1,8 +1,8 @@
 package com.huytca2008110179.tuan4;
 
 public class Dog {
-    String name, color;
-    int size;
+    public String name, color;
+    public int size;
 
     public Dog(int s, String n, String c){
         size = s;

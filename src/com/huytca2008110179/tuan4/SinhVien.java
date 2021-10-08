@@ -1,8 +1,8 @@
 package com.huytca2008110179.tuan4;
 
 public class SinhVien {
-    int MSSV, tuoi;
-    String ten, queQuan;
+    public int MSSV, tuoi;
+    public String ten, queQuan;
 
     public SinhVien (int ms, int t, String n, String q){
         MSSV = ms;
@@ -16,8 +16,6 @@ public class SinhVien {
         System.out.println("Họ tên: " + ten);
         System.out.println("Tuoi: " + tuoi);
         System.out.println("Quê quán: " + queQuan);
-
-        System.out.println("----------------");
     }
 
 }
