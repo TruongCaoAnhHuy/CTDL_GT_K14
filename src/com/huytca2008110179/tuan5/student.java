@@ -18,6 +18,15 @@ public class student {
         ten = name;
         diem = dtb;
     }
+    public int getMS(){
+        return MSSV;
+    }
+    public String getName(){
+        return ten;
+    }
+    public Double getDiem(){
+        return diem;
+    }
 
     public student() {
     }
@@ -43,16 +52,16 @@ public class student {
             studentlist[i] = new student(ms, name, diem);           
         }
     }
-    public void inTTsv(){
-        System.out.println("MSSV: " + MSSV);
-        System.out.println("Họ tên: " + ten);
-        System.out.println("Điểm: " + diem);
+    public void inTTsv(student stu){
+        System.out.println("MSSV: " + stu.MSSV);
+        System.out.println("Họ tên: " + stu.ten);
+        System.out.println("Điểm: " + stu.diem);
         System.out.println(" ");
     }
     public void Xuat(){
         System.out.println("---In DS sv---");
         for(student stu : studentlist){
-            stu.inTTsv();
+            stu.inTTsv(stu);
         } 
     }
     public void SapXep(){
@@ -69,7 +78,7 @@ public class student {
 
         System.out.println("---In DS sv theo diem---");
         for(student stu : studentlist){
-            stu.inTTsv();
+            stu.inTTsv(stu);
         }  
     }
 }

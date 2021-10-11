@@ -25,7 +25,7 @@ public class studentTestDrive {
                     st.Nhap();
                     break;
                 case 2:
-                    st.inTTsv();
+                    st.Xuat();
                     break;
                 case 3:
                     st.SapXep();
