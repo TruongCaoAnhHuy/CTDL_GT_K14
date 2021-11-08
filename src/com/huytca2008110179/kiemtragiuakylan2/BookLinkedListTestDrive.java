@@ -22,12 +22,10 @@ public class BookLinkedListTestDrive {
 
         danhSach.addTail(book);
 
-        danhSach.addAfter(sachCanTim, sachCanThem);;
-
         
 
         System.out.println("====Danh sách sau khi thêm ====");
-        danhSach.inDanhSach();
+        danhSach.inTT();
 
         System.out.print("Nhập mã sách muốn thêm vào đằng trước: ");
         int vitriThem = sc.nextInt();
