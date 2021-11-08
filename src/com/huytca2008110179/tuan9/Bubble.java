@@ -1,7 +1,6 @@
 package com.huytca2008110179.tuan9;
 
-import java.sql.Array;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 
 public class Bubble {
