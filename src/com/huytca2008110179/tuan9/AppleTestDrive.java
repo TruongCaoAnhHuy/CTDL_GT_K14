@@ -14,12 +14,13 @@ public class AppleTestDrive {
 
         ArrayList<Apple> listApple = new ArrayList<>(5);
 
-        listApple.add(new Apple(1, 30, "Do"));
-        listApple.add(new Apple(2, 25, "Vang"));
-        listApple.add(new Apple(3, 20, "Xanh"));
+        listApple.add(new Apple(1, 30.0, "Do"));
+        listApple.add(new Apple(2, 25.5, "Vang"));
+        listApple.add(new Apple(3, 20.8, "Xanh"));
         
-        int id,size;
+        int id;
         String color;
+        double size;
        // System.out.println("Size: "+listApple.size());
         
        /* for (Apple apple : listApple) {
