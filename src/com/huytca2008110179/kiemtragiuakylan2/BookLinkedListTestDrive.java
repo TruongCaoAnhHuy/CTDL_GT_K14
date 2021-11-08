@@ -29,7 +29,7 @@ public class BookLinkedListTestDrive {
         System.out.println("====Danh sách sau khi thêm ====");
         danhSach.inDanhSach();
 
-        System.out.print("Nhập mã táo muốn thêm vào đằng trước: ");
+        System.out.print("Nhập mã sách muốn thêm vào đằng trước: ");
         int vitriThem = sc.nextInt();
         danhSach.addAfter(vitriThem);
         danhSach.inTT();
