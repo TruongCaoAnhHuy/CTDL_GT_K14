@@ -1,9 +1,6 @@
 package com.huytca2008110179.tuan9;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Scanner;
 
 public class AppleTestDrive {

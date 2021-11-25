@@ -1,5 +1,6 @@
 package com.huytca2008110179.kiemtragiuakylan2;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 public class BookLinkedListTestDrive {
     public static void main(String[] args) {
@@ -29,12 +30,11 @@ public class BookLinkedListTestDrive {
 
         System.out.print("Nhập mã sách muốn thêm vào đằng trước: ");
         int vitriThem = sc.nextInt();
-        danhSach.addAfter(vitriThem);
+        //danhSach.addAfter(vitriThem);
         danhSach.inTT();
 
         System.out.println("Danh sách sau khi xóa cuối: ");
         danhSach.deleteTail();
         danhSach.inTT();
-
     }
 }

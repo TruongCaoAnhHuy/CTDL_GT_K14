@@ -10,7 +10,7 @@ public class TaiKhoan {
         sotaikhoan = stk;
         sodu = sd;
     }
-
+    
     void intThenganhang(){
         System.out.println("Tên chủ tài khoản: " + tenchutaikhoan);
         System.out.println("Số tài khoản: " + sotaikhoan);

@@ -8,7 +8,7 @@ public class BookTestDrive {
         
         Book book = new Book();
         Scanner sc = new Scanner(System.in);
-        ArrayList<Book> listBooks = new ArrayList<>(5);
+        ArrayList<Book> listBooks = new ArrayList<>();
 
         listBooks.add(new Book(1, 30, 20.000));
         listBooks.add(new Book(2, 22, 75.000));
@@ -16,12 +16,12 @@ public class BookTestDrive {
         
         int id,sl;
         double dongia;
-        String color;
+        
        // System.out.println("Size: "+listApple.size());
         
-        for (Book booktest : listBooks) {
-            booktest.inTT();
-        }
+        //for (Book booktest : listBooks) {
+            //booktest.inTT();
+        //}
         
         int menu;
         do{
