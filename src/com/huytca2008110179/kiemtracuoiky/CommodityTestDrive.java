@@ -11,6 +11,7 @@ public class CommodityTestDrive {
 
         cf.readyList();
         
+        
         int menu;
         do{
             System.out.println("=================== Menu ====================");
@@ -20,7 +21,7 @@ public class CommodityTestDrive {
             System.out.println("- 4.  Tìm kiếm sản phẩm theo loại (r)          -");
             System.out.println("- 5.  Tìm kiếm sản phẩm theo giá            -");
             System.out.println("- 6.  Tìm kiếm sản phẩm theo ngày           -");
-            System.out.println("- 7.  Sắp xếp theo giá                      -");
+            System.out.println("- 7.  Sắp xếp theo giá (r)                      -");
             System.out.println("- 8.  Sắp xếp theo ngày                     -");
             System.out.println("- 9.  Thống kê tổng số hàng hóa (r)            -");
             System.out.println("- 10. Thống kê giá trị nhập kho             -");

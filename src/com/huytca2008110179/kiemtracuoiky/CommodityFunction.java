@@ -2,7 +2,9 @@ package com.huytca2008110179.kiemtracuoiky;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.util.Comparator;
+import java.util.List;
+import java.util.Arrays;
 
 public class CommodityFunction {
     Commodity commodity = new Commodity();
@@ -43,69 +45,98 @@ public class CommodityFunction {
         
     }
 
-    public void fix(){
-
-    }
-
     public void findPrice(){
+        System.out.println("đang phát triển");
 
     }
 
     public void findDate(){
+        System.out.println("đang phát triển");
 
     }
     
     public int findID(){
-        System.out.print("Nhập mã cần xóa: ");
+        System.out.print("Nhập mã hàng: ");
         String timID = sc.nextLine();
 
         int x = -1;
 
-        //boolean kqID = false;
-
         for (Commodity commodityRemove : list) {
             if(timID.equalsIgnoreCase(commodityRemove.id)){
                 x = list.indexOf(commodityRemove);
-                //list.remove(x);
-                //System.out.println("Đã xóa SP có mã hàng: "+timID);
-                //kqID = true;
             }
         }
-        /*if(x == 0){
-            System.out.println("Không tìm thấy!!");
-        }*/
+
         return x;
     }
 
     //Xóa SP
     public void remove(){
-        if(findID() == -1){
-            System.out.println("Không tìm thấy!!");
+        int x = findID();
+        if(x != -1){
+            list.remove(x);
+            System.out.println("Đã xóa SP");
         }
         else{
-            //System.out.println("Không tìm thấy!!");
-            list.remove(findID());
-            System.out.println("Đã xóa SP có mã hàng: ");
+            System.out.println("Không có mã SP này!!");
         }
     }
 
-    public void sortPrice(){
+    public void fix(){
+        System.out.println("đang phát triển");
+        /*int x = findID();
+        if(x != -1){
+            Commodity nhap = new Commodity(commodity.id, commodity.number, commodity.name, commodity.type, commodity.price, commodity.date);
+            list.set(x, add());
+        }*/
+    }
 
+    public void sortPrice(){
+        //System.out.println("đang phát triển");
+        List sortlist = Arrays.asList(list); 
+        Comparator comparator = new Comparator<Commodity>(){
+            @Override
+            public int compare(Commodity o1, Commodity o2) {
+                // TODO Auto-generated method stub
+                return Double.compare(o1.price, o2.price);
+            }
+        };
+        
+        list.sort(comparator);
+
+        System.out.println("===================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO GIÁ====================================");
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+        System.out.println();
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+        System.out.println();
+        for(Commodity commoditySortPrice : list){
+            commoditySortPrice.inTT();
+        }  
+        System.out.println("===============================================================================================================");
     } 
 
     public void sortDate(){
+        System.out.println("đang phát triển");
 
     }
 
     public void totalCommodity(){
+        System.out.println("đang phát triển");
 
     }
 
     public void sumPrice(){
+        //System.out.println("đang phát triển");
+        double sum = 0;
+        for (Commodity commoditySum : list) {
+            sum+= commoditySum.price;
+        }
+        System.out.println("Tổng giá trị hàng hóa là: "+sum);
 
     }
 
     public void totalType(){
+        System.out.println("đang phát triển");
 
     }
 
@@ -120,8 +151,8 @@ public class CommodityFunction {
         for (Commodity commodity : list){
             commodity.inTT();
         }
-        System.out.println("===============================================================================================================");
 
+        System.out.println("===============================================================================================================");
         System.out.println("Tổng số lượng hàng hóa là: "+list.size());
         System.out.println();
         
@@ -145,10 +176,12 @@ public class CommodityFunction {
                 kq = true;
             }
         }
+        
         System.out.println("===============================================================================================================");
 
         if(kq == false){
-            System.out.println("Không tìm thấy!!");
+            System.out.println();
+            System.out.println("Không tìm thấy SP cùng loại !!");
         }
     }
 }

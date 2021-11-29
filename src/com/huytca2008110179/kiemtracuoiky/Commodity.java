@@ -74,7 +74,7 @@ public class Commodity {
     }
     
     public void nhapTT(){
-        System.out.print("Mã số: ");
+        System.out.print("Mã hàng:");
         id = sc.nextLine();
         System.out.print("Tên SP: ");
         name = sc.nextLine();
@@ -90,6 +90,14 @@ public class Commodity {
         setNSX(sc.nextInt(), sc.nextInt(), sc.nextInt());
     }
 
+    public boolean kiemTraTenHang(boolean k) {
+        if (this.id == "" || this.id.isEmpty()) {
+            System.out.println("Tên hàng không được để trống : ");
+        } else {
+            k = false;
+        }
+        return k;
+    }
     public void inTT(){
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(localeVN);
