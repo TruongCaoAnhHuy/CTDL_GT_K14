@@ -16,6 +16,23 @@ public class DemoDate {
         String str = chuyenNgaySangChuoi(ngaySinh);
 
         System.out.println(str);
+
+        String currentDateString = "02/27/2012 17:00:00";
+SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+Date currentDate = sd.parse(currentDateString);
+
+String yourDateString = "02/28/2012 15:00:00";
+SimpleDateFormat yourDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+Date yourDate = yourDateFormat.parse(yourDateString);
+
+if (yourDate.after(currentDate)) {
+    System.out.println("After");
+} else if(yourDate.equals(currentDate)) {
+    System.out.println("Same");
+} else {
+    System.out.println("Before");
+}
         
     }
 
@@ -39,7 +56,8 @@ public class DemoDate {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/mm/yyyy");
         chuoiNgayViet =  simpleDateFormat.format(date);
         return chuoiNgayViet;
-
     }
+
+    
 
 }

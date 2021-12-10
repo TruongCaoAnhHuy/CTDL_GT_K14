@@ -1,10 +1,12 @@
 package com.huytca2008110179.kiemtracuoiky;
 
 import java.util.Scanner;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Arrays;
+import java.util.Locale;
+import java.util.Date;
+import java.util.Calendar;
 
 public class CommodityFunction {
     Commodity commodity = new Commodity();
@@ -17,7 +19,7 @@ public class CommodityFunction {
         list.add(new Commodity("A03", 35, "Chen", "Sanh su", 30000, commodity.setNSX(2019, 3, 5)));
         list.add(new Commodity("A04", 5, "Tu lanh", "Dien may", 7200000, commodity.setNSX(2017, 8, 12)));
         list.add(new Commodity("A05", 10, "Laptop", "Dien may", 20800000, commodity.setNSX(2020, 7, 25)));
-        list.add(new Commodity("B01", 30, "Binh hoa", "Sanh su", 35000000, commodity.setNSX(2008, 2, 3)));
+        list.add(new Commodity("B01", 5, "Binh hoa", "Sanh su", 32000, commodity.setNSX(2008, 2, 3)));
         list.add(new Commodity("B02", 36, "Ca rot", "Thuc pham", 4000, commodity.setNSX(2021, 10, 9)));
         list.add(new Commodity("B03", 15, "Rau xa lach", "Thuc pham", 3000, commodity.setNSX(2021, 11, 18)));
         list.add(new Commodity("B04", 30, "Ly thuy tinh", "Sanh su", 245000, commodity.setNSX(2019, 7, 25)));
@@ -29,32 +31,66 @@ public class CommodityFunction {
         list.add(new Commodity("C05", 30, "Mi goi", "Thuc pham", 4000, commodity.setNSX(2021, 9, 3)));
         list.add(new Commodity("D01", 6, "May lanh", "Dien may", 5870000, commodity.setNSX(2009, 1, 30)));
         list.add(new Commodity("D02", 3, "Ti-vi", "Dien may", 39580000, commodity.setNSX(2015, 5, 31)));
-        list.add(new Commodity("D03", 30, "Dia thuy tinh", "Sanh su", 58000, commodity.setNSX(2019, 11, 21)));
+        list.add(new Commodity("D03", 30, "Dia thuy tinh", "Sanh su", 50000, commodity.setNSX(2019, 11, 21)));
         list.add(new Commodity("D04", 10, "Sugar", "Thuc pham", 32000, commodity.setNSX(2021, 5, 28)));
         list.add(new Commodity("D05", 15, "Muong thuy tinh", "Sanh su", 25800, commodity.setNSX(2020, 12, 13)));
-    }                       
-
-    //Thêm SP
-    public void add(){
-        System.out.print("Số lượng sp cần thêm: ");
-        int n = sc.nextInt();
-        for(int i=0; i<n; i++){
-            commodity.nhapTT();
-            list.add(new Commodity(commodity.id, commodity.number, commodity.name, commodity.type, commodity.price, commodity.date));
-        }
-        
-    }
-
-    public void findPrice(){
-        System.out.println("đang phát triển");
-
-    }
-
-    public void findDate(){
-        System.out.println("đang phát triển");
-
-    }
+    }                      
     
+    public void xuatDS(){
+        System.out.println("==============================================DANH SÁCH HÀNG HÓA===============================================");
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+        System.out.println();
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+        System.out.println();
+
+        for (Commodity commodity : list){
+            commodity.inTT();
+        }
+
+        System.out.println("===============================================================================================================");        
+    }
+
+    public void sortType(){
+        //String n = list.toString();
+        Comparator comparatorType = new Comparator<Commodity>() {
+            @Override
+            public int compare(Commodity o1, Commodity o2) {
+                
+                return o1.getType().compareTo(o2.getType());
+            }
+        };
+        list.sort(comparatorType);
+
+        for (Commodity commodity : list) {
+            System.out.println(commodity.getType());
+        }
+    }
+
+    public void sort(){
+        Comparator comparator = new Comparator<Commodity>(){
+            @Override
+            public int compare(Commodity o1, Commodity o2) {
+                return Double.compare(o1.price, o2.price);
+            }
+        };
+        /*if(commodity.getPrice() == commodity.getPrice()){
+            sortType();
+        }*/
+        
+        list.sort(comparator);
+    }
+
+    public void sortDateFunction(){
+        Comparator comparatorDate = new Comparator<Commodity>(){
+            @Override
+            public int compare(Commodity o1, Commodity o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        };
+        
+        list.sort(comparatorDate);
+    }
+
     public int findID(){
         System.out.print("Nhập mã hàng: ");
         String timID = sc.nextLine();
@@ -66,8 +102,45 @@ public class CommodityFunction {
                 x = list.indexOf(commodityRemove);
             }
         }
-
         return x;
+    }
+
+    public Date setNSX(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, day);
+        commodity.date = calendar.getTime();
+        return commodity.date;
+    }
+
+    public Double sum(){
+        double sum = 0;
+        System.out.println("============================================THỐNG KÊ GIÁ TRỊ HÀNG HÓA==========================================");
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Tổng giá tiền");
+        System.out.println();
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+        System.out.println();
+        for (Commodity commoditySumm : list) {
+            sum = commoditySumm.price*commoditySumm.number;
+            commoditySumm.inTTsum();
+        }
+        System.out.println("===============================================================================================================");
+        return sum;
+    }
+    
+
+    /****************************************************--------------------******************************************************/
+
+
+    //Thêm SP
+    public void add(){
+        System.out.print("Số lượng sp cần thêm: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        for(int i=0; i<n; i++){
+            commodity.nhapTT();
+            list.add(new Commodity(commodity.id, commodity.number, commodity.name, commodity.type, commodity.price, commodity.date));
+        }
+        //sc.nextLine();
     }
 
     //Xóa SP
@@ -82,82 +155,49 @@ public class CommodityFunction {
         }
     }
 
+    //Sửa SP
     public void fix(){
-        System.out.println("đang phát triển");
-        /*int x = findID();
-        if(x != -1){
-            Commodity nhap = new Commodity(commodity.id, commodity.number, commodity.name, commodity.type, commodity.price, commodity.date);
-            list.set(x, add());
-        }*/
-    }
-
-    public void sortPrice(){
         //System.out.println("đang phát triển");
-        List sortlist = Arrays.asList(list); 
-        Comparator comparator = new Comparator<Commodity>(){
-            @Override
-            public int compare(Commodity o1, Commodity o2) {
-                // TODO Auto-generated method stub
-                return Double.compare(o1.price, o2.price);
+        System.out.print("Nhập mã hàng: ");
+        String timID = sc.nextLine();
+
+        int x = -1;
+
+        for (Commodity commodityFix : list) {
+            if(timID.equalsIgnoreCase(commodityFix.id)){
+                x = list.indexOf(commodityFix);
             }
-        };
-        
-        list.sort(comparator);
-
-        System.out.println("===================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO GIÁ====================================");
-        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
-        System.out.println();
-        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
-        System.out.println();
-        for(Commodity commoditySortPrice : list){
-            commoditySortPrice.inTT();
-        }  
-        System.out.println("===============================================================================================================");
-    } 
-
-    public void sortDate(){
-        System.out.println("đang phát triển");
-
-    }
-
-    public void totalCommodity(){
-        System.out.println("đang phát triển");
-
-    }
-
-    public void sumPrice(){
-        //System.out.println("đang phát triển");
-        double sum = 0;
-        for (Commodity commoditySum : list) {
-            sum+= commoditySum.price;
         }
-        System.out.println("Tổng giá trị hàng hóa là: "+sum);
+        //sc.nextLine();
 
-    }
-
-    public void totalType(){
-        System.out.println("đang phát triển");
-
-    }
-
-    //Thống kê số lượng hàng
-    public void xuatDS(){
-        System.out.println("==============================================DANH SÁCH HÀNG HÓA===============================================");
-        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
-        System.out.println();
-        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
-        System.out.println();
-
-        for (Commodity commodity : list){
-            commodity.inTT();
+        for (int j=0; j<list.size(); j++){
+            if(j == x){
+                System.out.println("Mã SP: "+timID);
+                System.out.print("Tên SP sửa: ");
+                String name = sc.nextLine();
+                System.out.print("Loại SP sửa: ");
+                String type = sc.nextLine();
+                System.out.print("Giá bán sửa: ");
+                double price = sc.nextDouble();
+                sc.nextLine();
+                System.out.print("Số lượng sửa: ");
+                int number = sc.nextInt();
+                sc.nextLine();
+                System.out.print("Năm, tháng, ngày nhập hàng sửa (tách nhau bằng dấu cách): ");
+                Date date = commodity.setNSX(sc.nextInt(), sc.nextInt(), sc.nextInt());
+                
+                list.get(j).setID(timID);
+                list.get(j).setName(name);
+                list.get(j).setType(type);
+                list.get(j).setPrice(price);
+                list.get(j).setNumber(number);
+                list.get(j).setDate(date);
+             }
         }
-
-        System.out.println("===============================================================================================================");
-        System.out.println("Tổng số lượng hàng hóa là: "+list.size());
-        System.out.println();
-        
+        sc.nextLine();
     }
 
+    //Tìm SP theo loại
     public void findType(){
         System.out.print("Nhập loại cần tìm: ");
         String timLoai = sc.nextLine();
@@ -176,12 +216,306 @@ public class CommodityFunction {
                 kq = true;
             }
         }
-        
+
         System.out.println("===============================================================================================================");
 
         if(kq == false){
             System.out.println();
             System.out.println("Không tìm thấy SP cùng loại !!");
         }
+    }
+
+    //Tìm SP theo giá tiền
+    public void findPrice(){
+        System.out.print("Nhập giá tối thiểu: ");
+        Double timGia = sc.nextDouble();
+        sc.nextLine();
+        System.out.print("Nhập giá tối đa: ");
+        double timGia2 = sc.nextDouble();
+        sc.nextLine();
+
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(localeVN);
+        String strGia = numberFormat.format(timGia);
+        String strGia2 = numberFormat.format(timGia2);
+
+        System.out.println();
+        System.out.println("Loại SP cần tìm có giá khoảng từ "+strGia+" đến "+strGia2+": ");
+        System.out.println("===========================================DANH SÁCH HÀNG HÓA cẦN TÌM==========================================");
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+        System.out.println();
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+        System.out.println();
+              
+        boolean kq=false;
+
+        sort();
+
+        for (Commodity commodityTimGia : list) {
+            if(timGia <= commodityTimGia.price && timGia2 >= commodityTimGia.price){
+                commodityTimGia.inTT();
+                kq = true;
+            }
+        }
+        System.out.println("===============================================================================================================");
+
+        if(kq == false){
+            System.out.println();
+            System.out.println("Không tìm thấy SP cùng loại !!");
+        }
+        System.out.println();
+    }
+
+    //Tìm SP theo ngày
+    public void findDate(){
+        System.out.print("Năm, tháng, ngày bắt đầu (tách nhau bằng dấu cách): ");
+        Date date = setNSX(sc.nextInt(), sc.nextInt(), sc.nextInt()-1);
+        
+        System.out.print("Năm, tháng, ngày kết thúc (tách nhau bằng dấu cách): ");
+        Date date2 = setNSX(sc.nextInt(), sc.nextInt(), sc.nextInt());
+
+        sortDateFunction();
+
+        boolean kq=false;
+
+        System.out.println("==================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO NGÀY====================================");
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+        System.out.println();
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+        System.out.println();
+        for (Commodity commodityTimNgay : list) {
+            if(date.before(commodityTimNgay.date) && date2.after(commodityTimNgay.date)){
+                commodityTimNgay.inTT();
+                kq = true;
+            }
+         }       
+        System.out.println("===============================================================================================================");
+        System.out.println();
+        
+        if(kq == false){
+            System.out.println("Không tìm thấy!!");
+        }
+    }
+   
+    //Sắp xếp theo giá
+    public void sortPrice(){
+        int menu;
+        System.out.println("   -> 1. Theo loại SP \"Dien may\"");
+        System.out.println("   -> 2. Theo loại SP \"Sanh su\"");
+        System.out.println("   -> 3. Theo loại SP \"Thuc pham\"");
+        System.out.println("   -> 4. Theo loại danh sách ban đầu");
+        System.out.print("Chọn mục cần sắp xếp: ");
+        menu = sc.nextInt();
+        switch (menu){
+            case 1:
+                sort();
+                System.out.println("==================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO \"Dien May\"==============================");
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+                System.out.println();
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+                System.out.println();
+                for (Commodity commodityTimLoai : list) {
+                    if(commodityTimLoai.type.equalsIgnoreCase("dien may")){
+                        commodityTimLoai.inTT();
+                    }
+                }
+                System.out.println("===============================================================================================================");
+                System.out.println();
+                break;
+            case 2:
+                sort();
+                System.out.println("==================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO \"Sanh su\"===============================");
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+                System.out.println();
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+                System.out.println();
+                for (Commodity commodityTimLoai : list) {
+                    if(commodityTimLoai.type.equalsIgnoreCase("sanh su")){
+                        commodityTimLoai.inTT();
+                    }
+                }
+                System.out.println("===============================================================================================================");
+                System.out.println();
+
+                break;
+            case 3:
+                sort();
+                System.out.println("==================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO \"Thuc pham\"=============================");
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+                System.out.println();
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+                System.out.println();
+                for (Commodity commodityTimLoai : list) {
+                    if(commodityTimLoai.type.equalsIgnoreCase("thuc pham")){
+                        commodityTimLoai.inTT();
+                    }
+                }
+                System.out.println("===============================================================================================================");
+                System.out.println();
+
+                break;
+            case 4:
+                //sortType();
+                sort();
+                System.out.println("===================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO NGÀY===================================");
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+                System.out.println();
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+                System.out.println();
+                for(Commodity commoditySortDate : list){
+                    commoditySortDate.inTT();
+                }  
+                System.out.println("===============================================================================================================");
+                System.out.println();
+                break;
+            default:
+                System.out.println("Không có chức năng này!!");
+        }
+        sc.nextLine();
+        /*sort();
+
+        System.out.println("===================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO GIÁ====================================");
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+        System.out.println();
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+        System.out.println();
+        for(Commodity commoditySortPrice : list){
+            commoditySortPrice.inTT();
+        }  
+        System.out.println("===============================================================================================================");
+        System.out.println();*/
+    } 
+
+    //Sắp xếp SP theo ngày
+    public void sortDate(){
+        int menu;
+        System.out.println("   -> 1. Theo loại SP \"Dien may\"");
+        System.out.println("   -> 2. Theo loại SP \"Sanh su\"");
+        System.out.println("   -> 3. Theo loại SP \"Thuc pham\"");
+        System.out.println("   -> 4. Theo loại danh sách ban đầu");
+        System.out.print("Chọn mục cần sắp xếp: ");
+        menu = sc.nextInt();
+        switch (menu){
+            case 1:
+                sortDateFunction();
+                System.out.println("==================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO \"Dien May\"==============================");
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+                System.out.println();
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+                System.out.println();
+                for (Commodity commodityTimLoai : list) {
+                    if(commodityTimLoai.type.equalsIgnoreCase("dien may")){
+                        commodityTimLoai.inTT();
+                    }
+                }
+                System.out.println("===============================================================================================================");
+                System.out.println();
+                break;
+            case 2:
+                sortDateFunction();
+                System.out.println("==================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO \"Sanh su\"===============================");
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+                System.out.println();
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+                System.out.println();
+                for (Commodity commodityTimLoai : list) {
+                    if(commodityTimLoai.type.equalsIgnoreCase("sanh su")){
+                        commodityTimLoai.inTT();
+                    }
+                }
+                System.out.println("===============================================================================================================");
+                System.out.println();
+
+                break;
+            case 3:
+                sortDateFunction();
+                System.out.println("==================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO \"Thuc pham\"=============================");
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+                System.out.println();
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+                System.out.println();
+                for (Commodity commodityTimLoai : list) {
+                    if(commodityTimLoai.type.equalsIgnoreCase("thuc pham")){
+                        commodityTimLoai.inTT();
+                    }
+                }
+                System.out.println("===============================================================================================================");
+                System.out.println();
+
+                break;
+            case 4:
+                //sortType();
+                sortDateFunction();
+                System.out.println("===================================DANH SÁCH HÀNG HÓA ĐƯỢC SẮP XẾP THEO NGÀY===================================");
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+                System.out.println();
+                System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+                System.out.println();
+                for(Commodity commoditySortDate : list){
+                    commoditySortDate.inTT();
+                }  
+                System.out.println("===============================================================================================================");
+                System.out.println();
+                break;
+            default: 
+                System.out.println("Không có chức năng này!!");
+                break;
+        }
+        sc.nextLine();
+    }
+
+    //Thống kê số lượng hàng
+    public void totalCommodity(){
+        xuatDS();
+        System.out.println("Tổng số lượng hàng hóa là: "+list.size());
+        System.out.println();
+    }
+
+    //Thống kê giá trị hàng hóa
+    public void sumPrice(){
+        
+        double sum = sum();
+        for (Commodity commoditySum : list) {
+            sum+= commoditySum.sumPrice;
+        }
+
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(localeVN);
+        String strSum = numberFormat.format(sum);
+
+        System.out.printf("%-12s %-22s %-20s %-11s %-10s %-10s","Tổng tiền tất cả hàng hóa là: ","","","","",strSum);
+        System.out.println();
+
+    }
+    
+    //Thống kê theo từng loại
+    public void totalType(){
+        System.out.print("Nhập loại cần tìm: ");
+        String timLoai = sc.nextLine();
+        System.out.println("Loại SP cần tìm: "+timLoai);
+        System.out.println("===========================================DANH SÁCH HÀNG HÓA cẦN TÌM==========================================");
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","Mã hàng","Tên SP","Loại SP","Giá bán(/1sp)","Số lượng","Ngày nhập kho");
+        System.out.println();
+        System.out.printf("%-12s %-22s %-20s %-20s %-19s %-20s","-------","------","-------","-------------","--------","-------------");
+        System.out.println();
+              
+        boolean kq=false;
+        int sizeType = 0;
+
+        for (Commodity commodityTimLoai : list) {
+            if(timLoai.equalsIgnoreCase(commodityTimLoai.type)){
+                commodityTimLoai.inTT();
+                sizeType++;
+                kq = true;
+            }
+        }
+        
+        System.out.println("===============================================================================================================");
+        System.out.println("Tổng số lượng hàng hóa \""+timLoai+"\" là: "+sizeType);
+
+        if(kq == false){
+            System.out.println("Không tìm thấy SP cùng loại !!");
+        }
+        System.out.println();
     }
 }
