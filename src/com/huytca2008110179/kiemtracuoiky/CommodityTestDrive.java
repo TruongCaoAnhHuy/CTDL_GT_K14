@@ -39,7 +39,7 @@ public class CommodityTestDrive {
                     cf.remove();
                     break;
                 case 3:
-                    cf.fix();
+                    cf.Update();
                     break;
                 case 4:
                     cf.findType();

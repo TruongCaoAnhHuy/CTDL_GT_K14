@@ -10,7 +10,7 @@ public class AppleTestDrive1 {
         int menu;
         do {
             System.out.println("|==============MENU==============|");
-            System.out.println("|   1.Thêm táo vào kho độ           |");
+            System.out.println("|   1.Thêm táo vào kho độ        |");
             System.out.println("|   2.Tìm táo theo màu           |");
             System.out.println("|   3.In danh sách táo           |");
             System.out.println("|================================|");
