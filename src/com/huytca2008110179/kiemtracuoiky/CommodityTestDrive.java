@@ -15,14 +15,14 @@ public class CommodityTestDrive {
         //boolean ktmh = true;
         do{
             System.out.println("=================== Menu ====================");
-            System.out.println("- 1.  Nhập thêm sản phẩm                    -");
-            System.out.println("- 2.  Xóa sản phẩm                          -");
-            System.out.println("- 3.  Sửa sản phẩm                          -");
-            System.out.println("- 4.  Tìm kiếm sản phẩm theo loại           -");
-            System.out.println("- 5.  Tìm kiếm sản phẩm theo giá            -");
-            System.out.println("- 6.  Tìm kiếm sản phẩm theo ngày           -");
-            System.out.println("- 7.  Sắp xếp theo giá                      -");
-            System.out.println("- 8.  Sắp xếp theo ngày                     -");
+            System.out.println("- 1.  Nhập thêm hàng hóa                    -");
+            System.out.println("- 2.  Xóa thông tin hàng hóa                -");
+            System.out.println("- 3.  Sửa thông tin hàng hóa                -");
+            System.out.println("- 4.  Tìm kiếm hàng hóa theo loại           -");
+            System.out.println("- 5.  Tìm kiếm hàng hóa theo giá            -");
+            System.out.println("- 6.  Tìm kiếm hàng hóa theo ngày           -");
+            System.out.println("- 7.  Sắp xếp hàng hóa theo giá             -");
+            System.out.println("- 8.  Sắp xếp hàng hóa theo ngày            -");
             System.out.println("- 9.  Thống kê tổng số hàng hóa             -");
             System.out.println("- 10. Thống kê giá trị nhập kho             -");
             System.out.println("- 11. Thống kê số lượng từng loại hàng hóa  -");

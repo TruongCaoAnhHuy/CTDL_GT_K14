@@ -4,8 +4,6 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -125,7 +123,7 @@ public class Commodity {
 
     public boolean kiemTraLoaiHang(boolean k) {
         if (this.type == "" || this.type.trim().isEmpty()) {
-            System.out.println("Tên hàng không được để trống !!");
+            System.out.println("Loại hàng không được để trống !!");
         } else {
             k = false;
         }
@@ -146,14 +144,14 @@ public class Commodity {
 
         do{
 
-            System.out.print("Tên SP: ");
+            System.out.print("Tên hàng: ");
             setName(sc.nextLine());
 
         }while (kiemTraTenHang(ktTH));
 
         do{
 
-            System.out.print("Loại SP: ");
+            System.out.print("Loại hàng: ");
             setType(sc.nextLine());
 
         }while (kiemTraLoaiHang(ktLH));
@@ -168,23 +166,6 @@ public class Commodity {
         setNSX(sc.nextInt(), sc.nextInt(), sc.nextInt());
     }
 
-    public void editTT(){
-        System.out.print("Mã hàng:");
-        id = getID();
-        System.out.print("Tên SP: ");
-        name = sc.nextLine();
-        System.out.print("Loại SP: ");
-        type = sc.nextLine();
-        System.out.print("Giá bán: ");
-        price = sc.nextDouble();
-        sc.nextLine();
-        System.out.print("Số lượng: ");
-        number = sc.nextInt();
-        sc.nextLine();
-        System.out.print("Năm, tháng, ngày nhập hàng (tách nhau bằng dấu cách): ");
-        setNSX(sc.nextInt(), sc.nextInt(), sc.nextInt());
-    }
-    
     public void inTT(){
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(localeVN);
